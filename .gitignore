@@ -1,0 +1,18 @@
+# ---------------------------------------------
+# Ignorar archivos y directorios de Terraform
+# Estos archivos son generados localmente y no
+# deben ser rastreados por Git.
+# ---------------------------------------------
+
+# Directorio de caché y proveedores
+.terraform/
+
+# Archivos de estado de Terraform
+*.tfstate
+*.tfstate.backup
+
+# Archivos de seguimiento de dependencias (lock file)
+.terraform.lock.hcl
+
+# Archivos de registro de crash de Terraform (si existen)
+crash.log
