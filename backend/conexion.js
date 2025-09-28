@@ -4,7 +4,7 @@ const mysql = require('mysql2')
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'Bo4rdsUrf333*',
+    password: 'admin', //coloca tu respectiva contraseña
     database: 'db_inv_ti'
 }
 
