@@ -3,7 +3,7 @@
 
 
 # Avance de Nuestro Proyecto "Sistema de inventario"
-
+![Diagrama API Gateway](https://github.com/user-attachments/assets/e619574a-51e3-4237-8db2-faf49a1a8057)
 # Integrantes:
 
 1. Ahumada Soles Carlos
