@@ -1,6 +1,6 @@
 1. Inicializar Terraform
    
-terraform init
+"terraform init"
 
 Este comando descarga e instala todo lo necesario para trabajar con AWS, se usa al comenzar o cuando agregues nuevos módulos siempre y cuando sea una vez al inicio o después de cambios en la configuración.
 
