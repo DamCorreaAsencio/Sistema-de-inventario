@@ -18,3 +18,13 @@ output "private_subnet_ids" {
     aws_subnet.private_b.id
   ]
 }
+
+output "nat_gateway_id" {
+  description = "ID del NAT Gateway"
+  value       = aws_nat_gateway.nat.id
+}
+
+output "private_route_table_id" {
+  description = "ID de la Route Table Privada"
+  value       = aws_route_table.private.id
+}

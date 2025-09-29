@@ -92,3 +92,52 @@ resource "aws_route_table_association" "public_b_assoc" {
   subnet_id      = aws_subnet.public_b.id
   route_table_id = aws_route_table.public.id
 }
+
+# Elastic IP para el NAT Gateway
+resource "aws_eip" "nat" {
+  tags = {
+    Name        = "eip-nat-${var.environment}"
+    Environment = var.environment
+  }
+}
+
+# NAT Gateway en subred pública A
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public_a.id
+
+  tags = {
+    Name        = "nat-${var.environment}"
+    Environment = var.environment
+  }
+
+  depends_on = [aws_internet_gateway.igw]
+}
+
+# Route Table privada
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name        = "rt-private-${var.environment}"
+    Environment = var.environment
+  }
+}
+
+# Ruta para salida a Internet vía NAT en la route table privada
+resource "aws_route" "private_internet_access" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat.id
+}
+
+# Asociar la route table privada con las subredes privadas
+resource "aws_route_table_association" "private_a_assoc" {
+  subnet_id      = aws_subnet.private_a.id
+  route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "private_b_assoc" {
+  subnet_id      = aws_subnet.private_b.id
+  route_table_id = aws_route_table.private.id
+}
