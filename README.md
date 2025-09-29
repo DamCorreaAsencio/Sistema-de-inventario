@@ -26,3 +26,9 @@ Por ello, se requiere implementar una arquitectura en la nube que garantice alta
 
 Diseñar e implementar una aplicación web con backend y frontend desplegados en AWS, asegurando disponibilidad y escalabilidad mediante el uso de instancias EC2, balanceadores de carga, y base de datos gestionada.
 
+REQUISITOS NO FUNCIONALES:
+Escalabilidad automática: La infraestructura debe ser capaz de ajustar automáticamente el número de instancias en función del tráfico, garantizando la disponibilidad ante picos de demanda sin intervención manual.
+
+Redundancia geográfica: Debe haber instancias desplegadas en múltiples zonas de disponibilidad (AZ) dentro de la misma región, para asegurar que si una AZ falla, las otras sigan operativas.
+
+Recuperación ante fallos: La infraestructura debe contar con mecanismos automáticos de failover y backups periódicos, permitiendo la rápida recuperación de servicios en caso de fallos.
