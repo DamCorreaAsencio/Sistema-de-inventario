@@ -14,5 +14,9 @@
 # Archivos de seguimiento de dependencias (lock file)
 .terraform.lock.hcl
 
+terraform.tfstate.backup
+
+terraform.tfstate
+
 # Archivos de registro de crash de Terraform (si existen)
 crash.log
