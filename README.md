@@ -6,7 +6,7 @@
 2. Calluchi Patiño  Eduardo
 3. Principe Huamanchumo Luis
 4. Sandoval Vargas Robert
-5. Asencio Correa Damer
+5. Correa Asencio Damer
 
 *Contexto*
 
@@ -25,3 +25,4 @@ Por ello, se requiere implementar una arquitectura en la nube que garantice alta
 *Objetivos*
 
 Diseñar e implementar una aplicación web con backend y frontend desplegados en AWS, asegurando disponibilidad y escalabilidad mediante el uso de instancias EC2, balanceadores de carga, y base de datos gestionada.
+
