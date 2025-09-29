@@ -18,3 +18,14 @@ module "security_groups" {
   vpc_id     = module.vpc.vpc_id
   environment = "dev"
 }
+
+module "ec2_backend" {
+  source = "../../modulos/ec2"
+
+  ami_id            = "ami-0ca4d5db4872d0c28" # Amazon Linux 2023
+  instance_type     = "t2.micro"
+  subnet_id         = module.vpc.private_subnet_ids[0]  # primera subred privada
+  security_group_id = module.security_groups.ec2_sg_id # SG EC2
+  key_name          = "dev-key"               # clave ya creada en AWS
+  environment       = "dev"
+}
