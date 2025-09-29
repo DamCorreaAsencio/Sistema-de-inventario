@@ -4,6 +4,13 @@
 
 # Avance de Nuestro Proyecto "Sistema de inventario"
 
+# Integrantes:
+
+1. Ahumada Soles Carlos
+2. Calluchi Patiño  Eduardo
+3. Principe Huamanchumo Luis
+4. Sandoval Vargas Robert
+5. Asencio Correa Damer
 *Contexto*
 
 En la actualidad, las empresas buscan soluciones tecnológicas que permitan optimizar la interacción con sus clientes y mejorar la gestión de sus procesos internos. Una aplicación web con frontend y backend integrados brinda la capacidad de ofrecer servicios digitales disponibles en todo momento, con seguridad y escalabilidad.
