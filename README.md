@@ -15,4 +15,5 @@ Recuperación ante fallos: la falta de redundancia expone a la empresa a riesgos
 Por ello, se requiere implementar una arquitectura en la nube que garantice alta disponibilidad, seguridad y eficiencia en costos.
 
 *Objetivos*
+
 Diseñar e implementar una aplicación web con backend y frontend desplegados en AWS, asegurando disponibilidad y escalabilidad mediante el uso de instancias EC2, balanceadores de carga, y base de datos gestionada.
