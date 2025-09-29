@@ -8,33 +8,32 @@ variable "environment" {
   type        = string
 }
 
-
-/*variable "project" {
+variable "public_subnet_a_cidr" {
+  description = "CIDR for public subnet A"
   type        = string
-  description = "Nombre del proyecto"
 }
 
-variable "env" {
+variable "public_subnet_b_cidr" {
+  description = "CIDR for public subnet B"
   type        = string
-  description = "Entorno (dev/prod)"
 }
 
-variable "vpc_cidr" {
+variable "private_subnet_a_cidr" {
+  description = "CIDR for private subnet A"
   type        = string
-  description = "CIDR de la VPC"
 }
 
-variable "public_subnets" {
-  type        = list(string)
-  description = "Lista de CIDRs para subnets públicas"
+variable "private_subnet_b_cidr" {
+  description = "CIDR for private subnet B"
+  type        = string
 }
 
-variable "private_subnets" {
-  type        = list(string)
-  description = "Lista de CIDRs para subnets privadas"
+variable "az_a" {
+  description = "Availability zone A"
+  type        = string
 }
 
-variable "azs" {
-  type        = list(string)
-  description = "Lista de zonas de disponibilidad"
-}*/
+variable "az_b" {
+  description = "Availability zone B"
+  type        = string
+}
