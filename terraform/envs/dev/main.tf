@@ -36,3 +36,13 @@ output "repository_url" {
 output "repository_name" {
   value = module.ecr.repository_name
 }
+
+# llamda al modulo ec2
+module "ec2" {
+  source            = "../../modulos/ec2"
+  ami_id            = "ami-0ca4d5db4872d0c28" # Amazon Linux 2 en us-east-2
+  instance_type     = "t2.micro"
+  key_name          = "dev-key"
+  security_group_id = module.security_groups.ec2_sg_id
+  subnet_ids        = module.vpc.private_subnets_ids
+}
