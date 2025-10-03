@@ -11,4 +11,9 @@ resource "aws_ecr_repository" "backend_repo" {
     Name        = "${var.project}-backend-repo"
     Environment = var.environment
   }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+  
 }
