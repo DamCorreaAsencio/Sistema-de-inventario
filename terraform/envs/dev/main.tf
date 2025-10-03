@@ -15,8 +15,24 @@ module "vpc" {
   private_subnets = ["10.1.1.0/24", "10.1.2.0/24"]
 }
 
+# llamada al modulo security_groups
 module "security_groups" {
   source      = "../../modulos/security_groups"
   vpc_id      = module.vpc.vpc_id
   environment = "dev"
+}
+
+# Módulo ECR - repositorio para la imagen backend
+module "ecr" {
+  source      = "../../modulos/ecr"
+  project     = "sistema-inventario"
+  environment = "dev"
+}
+
+output "repository_url" {
+  value = module.ecr.repository_url
+}
+
+output "repository_name" {
+  value = module.ecr.repository_name
 }
