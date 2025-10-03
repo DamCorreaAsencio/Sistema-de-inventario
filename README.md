@@ -1,5 +1,8 @@
-# Avance de Nuestro Proyecto "Sistema de inventario"
+# Proyecto "Sistema de inventario"
+El Sistema de Inventario es una solución diseñada para gestionar productos y operaciones internas de una empresa. La infraestructura está implementada en AWS mediante Terraform, garantizando alta disponibilidad, escalabilidad y seguridad. A través de los diferentes módulos (VPC, EC2, RDS, Load Balancer, API Gateway, S3, CloudFront, Route53 y WAF), se busca cubrir una arquitectura resiliente y automatizada, optimizada para entornos de producción.
+
 ![Diagrama API Gateway](https://github.com/user-attachments/assets/e619574a-51e3-4237-8db2-faf49a1a8057)
+Diagrama propuesto
 # Integrantes:
 
 1. Ahumada Soles Carlos
@@ -32,3 +35,4 @@ Escalabilidad automática: La infraestructura debe ser capaz de ajustar automát
 Redundancia geográfica: Debe haber instancias desplegadas en múltiples zonas de disponibilidad (AZ) dentro de la misma región, para asegurar que si una AZ falla, las otras sigan operativas.
 
 Recuperación ante fallos: La infraestructura debe contar con mecanismos automáticos de failover y backups periódicos, permitiendo la rápida recuperación de servicios en caso de fallos.
+
