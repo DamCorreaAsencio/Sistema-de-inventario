@@ -7,6 +7,13 @@
 Arquitectura web en AWS orientada a alta disponibilidad y escalado: los usuarios llegan por Internet → DNS (Route 53) → CDN/Edge (CloudFront + WAF) → API (API Gateway) → balanceador (ALB en subnet pública) → backend en EC2 (contenedores Docker) desplegados en Auto Scaling across AZs (subnets privadas). El frontend está en S3 servido por CloudFront. La base de datos es RDS Multi-AZ en subnets privadas. El pipeline de desarrollo usa GitHub → Terraform (infra) + Ansible (config) → ECR (imagenes Docker) → EC2 las ejecuta.
 
 El proyecto se puede desplegar 
+
+```bash
 Terraform init
+```
+```bash
 Terraform plan
+```
+```bash
 Terraform apply --aprove
+```
