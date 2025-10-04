@@ -1,24 +1,11 @@
-1. Inicializar Terraform
-   
-"terraform init"
+La VPC
+La VPC actúa como el cimiento de red para nuestra aplicación web empresarial. Es como un complejo industrial privado donde todos nuestros servicios (frontend, backend, base de datos) estarán alojados de forma segura y aislada del resto de internet, permitiendo control total sobre la conectividad y seguridad.
 
-Este comando descarga e instala todos los proveedores y módulos necesarios para trabajar con AWS, se ejecuta al comenzar el proyecto o cuando se agreguen nuevos componentes a la configuración.
+Tecnologías Implementadas
+El código despliega una red con subredes públicas para el frontend accesible desde internet, y subredes privadas para el backend y base de datos. Incluye un Internet Gateway como puerta de entrada principal, un NAT Gateway para permitir conexión saliente segura desde las subredes privadas, y tablas de ruta para dirigir el tráfico correctamente entre todos los componentes.
 
-2. Validar la Configuración
-   
-"terraform validate"
+Justificación de su Uso
+Esta arquitectura resuelve directamente los problemas de disponibilidad mediante redundancia en dos zonas, mejora la seguridad aislando la base de datos en subredes privadas, y establece la base para escalabilidad al permitir agregar fácilmente más servidores. El NAT Gateway asegura que los servidores privados puedan actualizarse sin exponerse a internet.
 
-Este comando revisa la sintaxis y estructura del código de Terraform para asegurar que no hay errores, se usa después de modificar cualquier archivo de configuración y muestra un mensaje de éxito si todo es correcto.
-
-3. Ver Plan de Ejecución
-   
-"terraform plan"
-
-Este comando genera un plan detallado mostrando todos los recursos que se crearán en AWS (VPC, subredes, gateways, tablas de rutas), permite revisar los cambios antes de aplicarlos y no realiza ninguna modificación en la infraestructura real.
-
-4. Aplicar los Cambios
-   
-"terraform apply"
-
-Este comando ejecuta el plan y crea toda la infraestructura de red en AWS según la configuración definida, solicita confirmación antes de proceder con el despliegue y una vez completado muestra las salidas definidas como los IDs de VPC y subredes.
-
+Cumplimiento de Requisitos
+La infraestructura creada satisface los requisitos no funcionales: proporciona redundancia geográfica con múltiples zonas de disponibilidad, establece los mecanismos de recuperación ante fallos, y prepara el terreno para la escalabilidad automática que se implementará con balanceadores de carga y auto-scaling groups.
