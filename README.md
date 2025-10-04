@@ -1,5 +1,7 @@
 # Sistema de inventario
 
+El Sistema de Inventario es una solución diseñada para gestionar productos y operaciones internas de una empresa. La infraestructura está implementada en AWS mediante Terraform, garantizando alta disponibilidad, escalabilidad y seguridad. A través de los diferentes módulos (VPC, EC2, RDS, Load Balancer, API Gateway, S3, CloudFront, Route53 y WAF), se busca cubrir una arquitectura resiliente y automatizada, optimizada para entornos de producción.
+
 ![59816c1b-6a29-4883-b178-1981fe2cdc3c](https://github.com/user-attachments/assets/3bba4138-8211-4db8-bfd9-c58f50b4a73a)
 
 1) Resumen ejecutivo de la arquitectura
@@ -17,3 +19,4 @@ Terraform plan
 ```bash
 Terraform apply --aprove
 ```
+
