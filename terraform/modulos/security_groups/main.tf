@@ -37,7 +37,7 @@ resource "aws_security_group" "alb_sg" {
 # Security Group para las instancias EC2
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.project}-ec2-sg"
-  description = "Permite tráfico desde el ALB y salida hacia RDS y otros servicios internos"
+  description = "Permite trafico desde el ALB y salida hacia RDS y otros servicios internos"
   vpc_id      = var.vpc_id
 
   # Tráfico interno desde ALB

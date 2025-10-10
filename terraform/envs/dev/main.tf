@@ -21,3 +21,9 @@ module "security_groups" {
   project     = "sistemainventario"
   environment = "dev"
 }
+
+module "ecr" {
+  source      = "../../modulos/ecr"
+  project     = "sistemainventario"
+  environment = "dev"
+}
