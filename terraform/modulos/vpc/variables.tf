@@ -1,6 +1,6 @@
 # Nombre del proyecto (para tags)
 variable "project" {
-  description = "Nombre del proyecto para etiquetar recursos"
+  description = "sistema d einventario-vpc"
   type        = string
 }
 

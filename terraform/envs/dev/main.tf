@@ -14,3 +14,10 @@ module "vpc" {
   az_a = "us-east-2a"
   az_b = "us-east-2b"
 }
+
+module "security_groups" {
+  source      = "../../modulos/security_groups"
+  vpc_id      = module.vpc.vpc_id
+  project     = "sistemainventario"
+  environment = "dev"
+}
