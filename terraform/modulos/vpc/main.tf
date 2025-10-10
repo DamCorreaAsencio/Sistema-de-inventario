@@ -18,14 +18,27 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-#Subnets
-# Subnet pública (ALB)
-resource "aws_subnet" "public_alb" {
+# Subnets públicas (para ALB)
+resource "aws_subnet" "public_a" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.public_subnet_cidr
+  cidr_block              = "10.1.0.0/24"
   availability_zone       = var.az_a
   map_public_ip_on_launch = true
-  tags = { Name = "${var.project}-public-alb" }
+
+  tags = {
+    Name = "${var.project}-public-a"
+  }
+}
+
+resource "aws_subnet" "public_b" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.1.4.0/24"
+  availability_zone       = var.az_b
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "${var.project}-public-b"
+  }
 }
 
 # Subnets privadas para EC2
@@ -71,8 +84,13 @@ resource "aws_route_table" "private" {
 }
 
 # ASOCIACIONES DE ROUTE TABLES
-resource "aws_route_table_association" "public_assoc" {
-  subnet_id      = aws_subnet.public_alb.id
+resource "aws_route_table_association" "public_assoc_a" {
+  subnet_id      = aws_subnet.public_a.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "public_assoc_b" {
+  subnet_id      = aws_subnet.public_b.id
   route_table_id = aws_route_table.public.id
 }
 
@@ -91,8 +109,7 @@ resource "aws_route_table_association" "private_rds_assoc" {
   route_table_id = aws_route_table.private.id
 }
 
-# VPC ENDPOINTS PARA ECR Y S3
-# ECR API
+# VPC ENDPOINTS
 resource "aws_vpc_endpoint" "ecr_api" {
   vpc_id              = aws_vpc.vpc.id
   service_name        = "com.amazonaws.${var.region}.ecr.api"
@@ -102,7 +119,6 @@ resource "aws_vpc_endpoint" "ecr_api" {
   tags = { Name = "${var.project}-ecr-api-endpoint" }
 }
 
-# ECR Docker Registry
 resource "aws_vpc_endpoint" "ecr_dkr" {
   vpc_id              = aws_vpc.vpc.id
   service_name        = "com.amazonaws.${var.region}.ecr.dkr"
@@ -112,11 +128,10 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   tags = { Name = "${var.project}-ecr-dkr-endpoint" }
 }
 
-# S3 Gateway Endpoint
 resource "aws_vpc_endpoint" "s3" {
-  vpc_id           = aws_vpc.vpc.id
-  service_name     = "com.amazonaws.${var.region}.s3"
+  vpc_id            = aws_vpc.vpc.id
+  service_name      = "com.amazonaws.${var.region}.s3"
   vpc_endpoint_type = "Gateway"
-  route_table_ids  = [aws_route_table.private.id]
+  route_table_ids   = [aws_route_table.private.id]
   tags = { Name = "${var.project}-s3-endpoint" }
 }

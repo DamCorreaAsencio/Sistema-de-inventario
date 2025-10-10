@@ -15,8 +15,13 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "public_subnet_cidr" {
-  description = "CIDR para subnet pública (ALB)"
+variable "public_subnet_a_cidr" {
+  description = "CIDR de la subnet pública A"
+  type        = string
+}
+
+variable "public_subnet_b_cidr" {
+  description = "CIDR de la subnet pública B"
   type        = string
 }
 
