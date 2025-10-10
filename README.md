@@ -5,6 +5,23 @@ El Sistema de Inventario es una herramienta creada para administrar productos y 
 
 Diagrama de arquitectura propuesto
 
+Requisitos no funcionales
+
+RNF 01:
+Disponibilidad
+
+RNF 02:
+Escalabilidad
+
+RNF 03:
+Seguridad
+
+RNF 04:
+Mantenibilidad / Automatización
+
+RNF 05:
+Observabilidad / Confiabilidad
+
 El Sistema de Inventario desarrollado sobre la infraestructura de AWS tiene como propósito solucionar estos problemas dentro de una empresa:
 1. Vulnerabilidad en la seguridad de datos
 
@@ -39,4 +56,5 @@ Terraform plan
 ```bash
 Terraform apply --aprove
 ```
+
 
