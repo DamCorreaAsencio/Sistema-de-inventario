@@ -60,7 +60,7 @@ resource "aws_subnet" "private_ec2_b" {
 resource "aws_subnet" "private_rds" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.private_subnet_rds_cidr
-  availability_zone = var.az_b
+  availability_zone = var.az_a
   tags = { Name = "${var.project}-private-rds" }
 }
 
