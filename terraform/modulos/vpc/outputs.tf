@@ -4,20 +4,22 @@ output "vpc_id" {
   value       = aws_vpc.vpc.id
 }
 
-# IDs de subnets públicas
-output "public_subnets_ids" {
-  description = "IDs de las subnets públicas"
-  value       = aws_subnet.public[*].id
+output "public_subnet_id" {
+  description = "Subnet pública (ALB)"
+  value       = aws_subnet.public_alb.id
 }
 
-# IDs de subnets privadas
 output "private_subnets_ids" {
-  description = "IDs de las subnets privadas"
-  value       = aws_subnet.private[*].id
+  description = "Subnets privadas (EC2)"
+  value       = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
 }
 
-# NAT Gateway ID
-output "nat_gateway_id" {
-  description = "ID del NAT Gateway"
-  value       = aws_nat_gateway.nat.id
+output "rds_subnet_id" {
+  description = "Subnet privada RDS"
+  value       = aws_subnet.private_rds.id
+}
+
+output "vpc_cidr" {
+  description = "CIDR VPC"
+  value       = aws_vpc.vpc.cidr_block
 }

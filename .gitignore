@@ -20,3 +20,7 @@ terraform.tfstate
 
 # Archivos de registro de crash de Terraform (si existen)
 crash.log
+
+# Excluir el estado local de Terraform
+*.tfstate
+*.tfstate.*

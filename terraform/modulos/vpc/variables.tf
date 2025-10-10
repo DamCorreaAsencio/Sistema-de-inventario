@@ -4,26 +4,43 @@ variable "project" {
   type        = string
 }
 
+variable "region" {
+  description = "Región AWS"
+  type        = string
+}
+
 # CIDR principal de la VPC
 variable "vpc_cidr" {
   description = "CIDR de la VPC"
   type        = string
 }
 
-# Zonas de disponibilidad
-variable "azs" {
-  description = "Lista de zonas de disponibilidad en la región"
-  type        = list(string)
+variable "public_subnet_cidr" {
+  description = "CIDR para subnet pública (ALB)"
+  type        = string
 }
 
-# Subnets públicas
-variable "public_subnets" {
-  description = "Lista de CIDR blocks para subnets públicas"
-  type        = list(string)
+variable "private_subnet_ec2_a_cidr" {
+  description = "CIDR subnet privada EC2 AZ-a"
+  type        = string
 }
 
-# Subnets privadas
-variable "private_subnets" {
-  description = "Lista de CIDR blocks para subnets privadas"
-  type        = list(string)
+variable "private_subnet_ec2_b_cidr" {
+  description = "CIDR subnet privada EC2 AZ-b"
+  type        = string
+}
+
+variable "private_subnet_rds_cidr" {
+  description = "CIDR subnet privada para RDS"
+  type        = string
+}
+
+variable "az_a" {
+  description = "Availability Zone A"
+  type        = string
+}
+
+variable "az_b" {
+  description = "Availability Zone B"
+  type        = string
 }

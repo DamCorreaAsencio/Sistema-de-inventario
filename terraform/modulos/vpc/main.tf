@@ -9,7 +9,7 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-# Internet Gateway (salida a Internet para subredes públicas)
+# Internet Gateway (solo para subnet pública)
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
@@ -18,52 +18,41 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# Subredes públicas
-resource "aws_subnet" "public" {
-  count                   = length(var.public_subnets)
+#Subnets
+# Subnet pública (ALB)
+resource "aws_subnet" "public_alb" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = element(var.public_subnets, count.index)
-  availability_zone       = element(var.azs, count.index % length(var.azs))
+  cidr_block              = var.public_subnet_cidr
+  availability_zone       = var.az_a
   map_public_ip_on_launch = true
-
-  tags = {
-    Name = "${var.project}-public-${count.index + 1}"
-  }
+  tags = { Name = "${var.project}-public-alb" }
 }
 
-# Subredes privadas
-resource "aws_subnet" "private" {
-  count                   = length(var.private_subnets)
-  vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = element(var.private_subnets, count.index)
-  availability_zone       = element(var.azs, count.index % length(var.azs))
-  map_public_ip_on_launch = false
-
-  tags = {
-    Name = "${var.project}-private-${count.index + 1}"
-  }
+# Subnets privadas para EC2
+resource "aws_subnet" "private_ec2_a" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.private_subnet_ec2_a_cidr
+  availability_zone = var.az_a
+  tags = { Name = "${var.project}-private-ec2-a" }
 }
 
-# Elastic IP para NAT Gateway
-resource "aws_eip" "nat" {
-  tags = {
-    Name = "${var.project}-nat-eip"
-  }
+resource "aws_subnet" "private_ec2_b" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.private_subnet_ec2_b_cidr
+  availability_zone = var.az_b
+  tags = { Name = "${var.project}-private-ec2-b" }
 }
 
-# NAT Gateway (salida a Internet desde subredes privadas)
-resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public[0].id
-
-  tags = {
-    Name = "${var.project}-nat"
-  }
-
-  depends_on = [aws_internet_gateway.igw]
+# Subnet privada para RDS
+resource "aws_subnet" "private_rds" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.private_subnet_rds_cidr
+  availability_zone = var.az_b
+  tags = { Name = "${var.project}-private-rds" }
 }
 
-# Tabla de ruteo para subredes públicas
+# ROUTE TABLES
+# Pública (con salida a Internet)
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.vpc.id
 
@@ -72,35 +61,62 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags = {
-    Name = "${var.project}-public-rt"
-  }
+  tags = { Name = "${var.project}-public-rt" }
 }
 
-# Asociación de subredes públicas a la tabla de ruteo pública
+# Privada (sin NAT, solo interna)
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.vpc.id
+  tags = { Name = "${var.project}-private-rt" }
+}
+
+# ASOCIACIONES DE ROUTE TABLES
 resource "aws_route_table_association" "public_assoc" {
-  count          = length(aws_subnet.public)
-  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.public_alb.id
   route_table_id = aws_route_table.public.id
 }
 
-# Tabla de ruteo para subredes privadas
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.vpc.id
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat.id
-  }
-
-  tags = {
-    Name = "${var.project}-private-rt"
-  }
+resource "aws_route_table_association" "private_ec2_a_assoc" {
+  subnet_id      = aws_subnet.private_ec2_a.id
+  route_table_id = aws_route_table.private.id
 }
 
-# Asociación de subredes privadas a la tabla de ruteo privada
-resource "aws_route_table_association" "private_assoc" {
-  count          = length(aws_subnet.private)
-  subnet_id      = aws_subnet.private[count.index].id
+resource "aws_route_table_association" "private_ec2_b_assoc" {
+  subnet_id      = aws_subnet.private_ec2_b.id
   route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "private_rds_assoc" {
+  subnet_id      = aws_subnet.private_rds.id
+  route_table_id = aws_route_table.private.id
+}
+
+# VPC ENDPOINTS PARA ECR Y S3
+# ECR API
+resource "aws_vpc_endpoint" "ecr_api" {
+  vpc_id              = aws_vpc.vpc.id
+  service_name        = "com.amazonaws.${var.region}.ecr.api"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
+  private_dns_enabled = true
+  tags = { Name = "${var.project}-ecr-api-endpoint" }
+}
+
+# ECR Docker Registry
+resource "aws_vpc_endpoint" "ecr_dkr" {
+  vpc_id              = aws_vpc.vpc.id
+  service_name        = "com.amazonaws.${var.region}.ecr.dkr"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
+  private_dns_enabled = true
+  tags = { Name = "${var.project}-ecr-dkr-endpoint" }
+}
+
+# S3 Gateway Endpoint
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id           = aws_vpc.vpc.id
+  service_name     = "com.amazonaws.${var.region}.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids  = [aws_route_table.private.id]
+  tags = { Name = "${var.project}-s3-endpoint" }
 }
