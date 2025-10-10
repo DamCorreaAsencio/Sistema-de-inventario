@@ -51,3 +51,11 @@ module "ec2_backend" {
   ec2_sg_id          = module.security_groups.ec2_sg_id
   target_group_arn   = module.alb.target_group_arn
 }
+
+module "apigateway" {
+  source        = "../../modulos/apigateway"
+  project       = "sistema-inventario"
+  region        = var.region
+  stage_name    = "dev"
+  alb_dns_name  = module.alb.alb_dns_name
+}
