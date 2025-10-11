@@ -7,10 +7,6 @@ Esto ocasionaba interrupciones en el servicio, errores en el control de producto
 
 Diagrama de arquitectura propuesto
 
-El sistema de inventario ha sido diseñado considerando atributos de calidad (ilities) que garantizan su rendimiento, disponibilidad y seguridad en entornos de producción. Cada ility deriva de un requerimiento no funcional específico, y su cumplimiento se evalúa mediante métricas medibles dentro de AWS, como disponibilidad (99%), tiempo de despliegue (>10 min), y detección de fallos (<1 min).
-La arquitectura (basada en AWS) incorpora componentes que refuerzan estos atributos: alta disponibilidad (RDS Multi-AZ, ALB), escalabilidad (Auto Scaling), seguridad (WAF, IAM, subredes privadas), mantenibilidad (Terraform y CI/CD), y confiabilidad (CloudWatch + SNS).
-
-
 El Sistema de Inventario desarrollado sobre la infraestructura de AWS tiene como propósito solucionar estos problemas dentro de una empresa:
 1. Vulnerabilidad en la seguridad de datos
 
@@ -27,6 +23,9 @@ El sistema anterior no soportaba el incremento de usuarios o transacciones simul
 4. Baja disponibilidad y resiliencia del sistema
 
 Las caídas de servidores comprometían la continuidad del servicio.
+
+El sistema de inventario ha sido diseñado considerando atributos de calidad (ilities) que garantizan su rendimiento, disponibilidad y seguridad en entornos de producción. Cada ility deriva de un requerimiento no funcional específico, y su cumplimiento se evalúa mediante métricas medibles dentro de AWS, como disponibilidad (95%), tiempo de despliegue (>10 min), y detección de fallos (<1 min).
+La arquitectura (basada en AWS) incorpora componentes que refuerzan estos atributos: alta disponibilidad (RDS Multi-AZ, ALB), escalabilidad (Auto Scaling), seguridad (WAF, IAM, subredes privadas), mantenibilidad (Terraform y CI/CD), y confiabilidad (CloudWatch + SNS).
 
 Nuestro proyecto se puede desplegar mediante estos comandos:
 
@@ -48,6 +47,10 @@ Terraform plan
 
 ```bash
 Terraform apply -auto-approve
+```
+
+```bash
+Terraform destroy
 ```
 
 
