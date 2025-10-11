@@ -24,10 +24,16 @@ El sistema anterior no soportaba el incremento de usuarios o transacciones simul
 
 Las caídas de servidores comprometían la continuidad del servicio.
 
-El sistema de inventario ha sido diseñado En primer lugar, se prioriza la disponibilidad, asegurando que la plataforma se mantenga operativa incluso ante fallos de componentes mediante el uso de RDS Multi-AZ, balanceadores de carga (ALB) y la distribución de instancias EC2 en dos zonas de disponibilidad, alcanzando un nivel de servicio del 95%.
+El sistema de inventario ha sido diseñado siguiendo cinco requerimientos no funcionales que garantizan su estabilidad y eficiencia en un entorno productivo. 
+
+En primer lugar, se prioriza la disponibilidad, asegurando que la plataforma se mantenga operativa incluso ante fallos de componentes mediante el uso de RDS Multi-AZ, balanceadores de carga (ALB) y la distribución de instancias EC2 en dos zonas de disponibilidad, alcanzando un nivel de servicio del 95%.
+
 La escalabilidad también es un aspecto clave, permitiendo que la infraestructura se adapte automáticamente ante incrementos de carga o usuarios, gracias a la implementación de Auto Scaling en las instancias EC2, balanceo dinámico con ALB y el enrutamiento gestionado a través de API Gateway, manteniendo tiempos de ajuste inferiores a dos minutos.
+
 En cuanto a la seguridad, se garantiza la protección de los datos y recursos del sistema mediante el uso de subredes privadas, políticas de identidad y acceso (IAM), comunicación cifrada bajo HTTPS, y un firewall de aplicaciones web (WAF) que bloquea accesos no autorizados, con un máximo de tres intentos fallidos por mes.
+
 La mantenibilidad se aborda mediante la automatización total del despliegue y actualización de la infraestructura, utilizando Terraform, Ansible y pipelines CI/CD con GitHub Actions y ECR, permitiendo tiempos de despliegue inferiores a 10 minutos y asegurando la reproducibilidad del entorno.
+
 Finalmente, se refuerza la confiabilidad del sistema mediante un monitoreo constante y notificaciones automáticas de fallos, logradas con la integración de CloudWatch y SNS, que permiten detectar y alertar sobre incidentes en menos de un minuto, garantizando una rápida respuesta ante cualquier eventualidad.
 
 Nuestro proyecto se puede desplegar mediante estos comandos:
@@ -55,6 +61,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
