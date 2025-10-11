@@ -43,6 +43,14 @@ Las caídas de servidores comprometían la continuidad del servicio.
 Nuestro proyecto se puede desplegar mediante estos comandos:
 
 ```bash
+cd .\terraform\
+```
+
+```bash
+cd .\dev\
+```
+
+```bash
 Terraform init
 ```
 
@@ -57,6 +65,7 @@ Terraform plan
 ```bash
 Terraform apply -auto-approve
 ```
+
 
 
 
