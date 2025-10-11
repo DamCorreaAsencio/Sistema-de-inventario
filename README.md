@@ -7,22 +7,9 @@ Esto ocasionaba interrupciones en el servicio, errores en el control de producto
 
 Diagrama de arquitectura propuesto
 
-Requisitos no funcionales
+El sistema de inventario ha sido diseñado considerando atributos de calidad (ilities) que garantizan su rendimiento, disponibilidad y seguridad en entornos de producción. Cada ility deriva de un requerimiento no funcional específico, y su cumplimiento se evalúa mediante métricas medibles dentro de AWS, como disponibilidad (99.9%), tiempo de despliegue (<5 min), y detección de fallos (<1 min).
+La arquitectura (basada en AWS) incorpora componentes que refuerzan estos atributos: alta disponibilidad (RDS Multi-AZ, ALB), escalabilidad (Auto Scaling), seguridad (WAF, IAM, subredes privadas), mantenibilidad (Terraform y CI/CD), y confiabilidad (CloudWatch + SNS).
 
-RNF 01:
-Disponibilidad
-
-RNF 02:
-Escalabilidad
-
-RNF 03:
-Seguridad
-
-RNF 04:
-Mantenibilidad / Automatización
-
-RNF 05:
-Observabilidad / Confiabilidad
 
 El Sistema de Inventario desarrollado sobre la infraestructura de AWS tiene como propósito solucionar estos problemas dentro de una empresa:
 1. Vulnerabilidad en la seguridad de datos
@@ -62,6 +49,7 @@ Terraform plan
 ```bash
 Terraform apply -auto-approve
 ```
+
 
 
 
