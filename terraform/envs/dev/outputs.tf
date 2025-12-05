@@ -28,6 +28,7 @@ output "cloudfront_url" {
   value       = module.cloudfront.cloudfront_url
 }
 
+# S3
 output "s3_bucket_name" {
   description = "Bucket S3 del frontend"
   value       = module.cloudfront.s3_bucket_name
@@ -39,6 +40,7 @@ output "cloudwatch_dashboard" {
   value       = module.cloudwatch.dashboard_name
 }
 
+# ECS
 output "ecs_log_group" {
   description = "Log group de ECS/Fargate"
   value       = module.cloudwatch.ecs_log_group_name
@@ -48,4 +50,20 @@ output "ecs_log_group" {
 output "waf_acl_id" {
   description = "ID del Web ACL de WAF"
   value       = module.waf.web_acl_id
+}
+
+# SQS y SNS
+output "sns_topic_arn" {
+  description = "ARN del tópico SNS para alertas"
+  value       = module.sns_sqs.sns_topic_arn
+}
+
+output "sqs_queue_url" {
+  description = "URL de la cola SQS"
+  value       = module.sns_sqs.sqs_queue_url
+}
+
+output "sqs_queue_name" {
+  description = "Nombre de la cola SQS"
+  value       = module.sns_sqs.sqs_queue_name
 }

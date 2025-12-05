@@ -55,3 +55,8 @@ variable "lb_listener" {
   description = "ARN del Listener del Load Balancer"
   type        = string
 }
+variable "sns_topic_arn" {
+  description = "ARN del tópico SNS para alertas"
+  type        = string
+  default     = ""
+}

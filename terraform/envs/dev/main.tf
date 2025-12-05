@@ -1,4 +1,4 @@
-#Llamada al BCP (VPC)
+# Llamada al BCP (VPC)
 module "vpc" {
   source = "../../modulos/vpc"
 
@@ -18,6 +18,7 @@ module "vpc" {
   endpoint_sg_id = module.security_groups.endpoint_sg_id
 }
 
+# Llamada a Security Groups
 module "security_groups" {
   source      = "../../modulos/security_groups"
   vpc_id      = module.vpc.vpc_id
@@ -25,6 +26,7 @@ module "security_groups" {
   environment = "dev"
 }
 
+# Llamada a Load Balancer (ALB)
 module "alb" {
   source         = "../../modulos/loadbalancer"
   project        = "sistemainventario"
@@ -34,6 +36,20 @@ module "alb" {
   alb_sg_id      = module.security_groups.alb_sg_id
 }
 
+# Llamada al SNQ y SQs
+module "sns_sqs" {
+  source = "../../modulos/sns_sqs"
+
+  project     = "sistemainventario"
+  environment = "dev"
+
+  # Email del admin (opcional)
+  admin_email = "stefanocorreaasencio@gmail.com"  # e-mail de referencia a ver
+
+  queue_depth_threshold = 100
+}
+
+# Llamada al fargate
 module "fargate_backend" {
   source              = "../../modulos/fargate"
   project             = "sistemainventario"
@@ -49,8 +65,12 @@ module "fargate_backend" {
   ecs_sg_id           = module.security_groups.ec2_sg_id
   target_group_arn    = module.alb.target_group_arn
   lb_listener         = module.alb.listener_arn
+
+  sns_topic_arn = module.sns_sqs.sns_topic_arn
+  depends_on = [module.sns_sqs]
 }
 
+# Llamada a API Gateway
 module "apigateway" {
   source        = "../../modulos/apigateway"
   project       = "sistema-inventario"
@@ -59,7 +79,7 @@ module "apigateway" {
   alb_dns_name  = module.alb.alb_dns_name
 }
 
-# RDS Multi
+# Llamada RDS Multi
 module "rds" {
   source = "../../modulos/rdsmulti"
 
@@ -77,7 +97,7 @@ module "rds" {
   db_password       = var.db_password
 
 #
-#Lo que viene está medio waos. En skip_final... y deletion_protection se invierten los true y false en producción
+# Lo que viene está medio waos. En skip_final... y deletion_protection se invierten los true y false en producción
 #
   skip_final_snapshot = true 
   deletion_protection = false
@@ -85,7 +105,7 @@ module "rds" {
   depends_on = [module.vpc, module.security_groups]
 }
 
-# CloudWatch (Monitoreo y Logs)
+# Llamafa a CloudWatch (Monitoreo y Logs)
 module "cloudwatch" {
   source = "../../modulos/cloudwatch"
 
@@ -109,7 +129,7 @@ module "cloudwatch" {
   depends_on = [module.fargate_backend, module.rds, module.alb]
 }
 
-# WAF (Firewall de Aplicación Web)
+# WAF W(Firewall de Aplicación Web)
 module "waf" {
   source = "../../modulos/waf"
 
@@ -118,13 +138,13 @@ module "waf" {
 
 #  blocked_ip_addresses = []
 
-  # Rate limiting: máximo 2000 peticiones por IP cada 5 minutos
+# Rate limiting: máximo 2000 peticiones por IP cada 5 minutos
   rate_limit = 2000
   enable_linux_protection = true
   enable_logging          = false # Activar cuando se teng a S3/Kinesis configurado
 }
 
-# CloudFront (CDN para Frontend)
+# Call to CloudFront (CDN para Frontend)
 module "cloudfront" {
   source = "../../modulos/cloudfront"
 

@@ -24,6 +24,24 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_attachment" {
   role       = aws_iam_role.task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
+/////////////////////////////////////////////////////////////////////////////////////
+resource "aws_iam_role_policy" "ecs_sns_publish" {
+  name = "${var.project}-ecs-sns-publish"
+  role = aws_iam_role.task_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "sns:Publish"
+        ]
+        Resource = var.sns_topic_arn
+      }
+    ]
+  })
+} //AGREGAO DESPUÉS DE CASI TODO PQ ME OLVIDÉ DEL SQS
 
 # TASK DEFINITION
 resource "aws_ecs_task_definition" "task" {
