@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Instalar dependencias
-RUN npm install
+RUN npm install --production
 
 # Copiar el resto del código
 COPY . .
@@ -16,5 +16,5 @@ COPY . .
 # Exponer el puerto donde corre tu backend (3000)
 EXPOSE 3000
 
-# Comando por defecto para iniciar
-CMD ["npm", "run", "dev"]
+# Comando por defecto para iniciar. Eta vaina es para producción D1
+CMD ["npm", "start"]  
