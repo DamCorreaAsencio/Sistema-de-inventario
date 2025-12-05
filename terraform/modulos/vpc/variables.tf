@@ -49,3 +49,7 @@ variable "az_b" {
   description = "Availability Zone B"
   type        = string
 }
+variable "endpoint_sg_id" {
+  description = "Security Group para los endpoints de VPC"
+  type        = string
+}

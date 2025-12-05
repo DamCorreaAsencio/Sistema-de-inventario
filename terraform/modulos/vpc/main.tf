@@ -110,13 +110,17 @@ resource "aws_route_table_association" "private_rds_assoc" {
 }
 
 # VPC ENDPOINTS
-resource "aws_vpc_endpoint" "ecr_api" {
+resource "aws_vpc_endpoint" "ecr_api" {//
   vpc_id              = aws_vpc.vpc.id
   service_name        = "com.amazonaws.${var.region}.ecr.api"
-  vpc_endpoint_type   = "Interface"
+  vpc_endpoint_type   = "Interface" 
   subnet_ids          = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
+  security_group_ids = [var.endpoint_sg_id]
   private_dns_enabled = true
-  tags = { Name = "${var.project}-ecr-api-endpoint" }
+  tags = {
+    Name    = "${var.project}-ecr-api-endpoint"
+    Project = var.project
+  }
 }
 
 resource "aws_vpc_endpoint" "ecr_dkr" {
@@ -125,13 +129,20 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   vpc_endpoint_type   = "Interface"
   subnet_ids          = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
   private_dns_enabled = true
-  tags = { Name = "${var.project}-ecr-dkr-endpoint" }
+  security_group_ids = [var.endpoint_sg_id]
+  tags = {
+    Name    = "${var.project}-ecr-dkr-endpoint"
+    Project = var.project
+  }
 }
 
-resource "aws_vpc_endpoint" "s3" {
-  vpc_id            = aws_vpc.vpc.id
-  service_name      = "com.amazonaws.${var.region}.s3"
-  vpc_endpoint_type = "Gateway"
-  route_table_ids   = [aws_route_table.private.id]
-  tags = { Name = "${var.project}-s3-endpoint" }
+resource "aws_vpc_endpoint" "s3" {//
+  vpc_id            = aws_vpc.vpc.id //
+  service_name      = "com.amazonaws.${var.region}.s3"//
+  vpc_endpoint_type = "Gateway"//
+  route_table_ids   = [aws_route_table.private.id]//
+  tags = {
+    Name    = "${var.project}-s3-endpoint"
+    Project = var.project
+  }
 }

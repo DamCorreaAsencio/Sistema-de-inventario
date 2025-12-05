@@ -7,5 +7,5 @@ variable "region" {
 variable "aws_profile" {
   description = "AWS profile"
   type        = string
-  default     = "CarlosAS" //cambiar con su usuario (IAM)
+  default     = "raulichoRod" //cambiar con su usuario (IAM)
 }

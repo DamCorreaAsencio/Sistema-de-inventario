@@ -1,4 +1,4 @@
-# AL (Público)
+# ALB (Público)
 resource "aws_lb" "this" {
   name               = "${var.project}-alb"
   internal           = false                     
@@ -16,9 +16,10 @@ resource "aws_lb" "this" {
 # Target Group (para las EC2 del backend)
 resource "aws_lb_target_group" "this" {
   name     = "${var.project}-tg"
-  port     = 80
+  port     = 3000
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+  target_type = "ip"
 
   health_check {
     path                = "/"

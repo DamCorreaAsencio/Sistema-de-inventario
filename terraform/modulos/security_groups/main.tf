@@ -34,30 +34,20 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# Security Group para las instancias EC2
-resource "aws_security_group" "ec2_sg" {
-  name        = "${var.project}-ec2-sg"
-  description = "Permite trafico desde el ALB y salida hacia RDS y otros servicios internos"
+#Acceso a los endpoints de la SG
+resource "aws_security_group" "endpoint_sg" {
+  name        = "${var.project}-endpoint-sg"
+  description = "Permite HTTPS para endpoints de VPC"
   vpc_id      = var.vpc_id
 
-  # Tráfico interno desde ALB
   ingress {
-    description     = "HTTP desde ALB"
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = [aws_security_group.alb_sg.id]
+    description = "Permite que ECS/Fargate acceda a los endpoints"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    security_groups = [aws_security_group.ec2_sg.id] ##En teoría debería ser fargate a endpoints xd
   }
 
-  ingress {
-    description     = "HTTPS desde ALB"
-    from_port       = 443
-    to_port         = 443
-    protocol        = "tcp"
-    security_groups = [aws_security_group.alb_sg.id]
-  }
-
-  # Sin SSH ni acceso externo, evita exposición y costos
   egress {
     from_port   = 0
     to_port     = 0
@@ -65,10 +55,7 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name        = "${var.project}-ec2-sg"
-    Environment = var.environment
-  }
+  tags = { Name = "${var.project}-endpoint-sg"}
 }
 
 # Security Group para la base de datos RDS
