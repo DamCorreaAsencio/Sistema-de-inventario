@@ -12,3 +12,8 @@ output "rds_sg_id" {
   description = "ID del Security Group del RDS"
   value       = aws_security_group.rds_sg.id
 }
+
+output "endpoint_sg_id" {
+  description = "ID del Security Group para VPC Endpoints"
+  value       = aws_security_group.endpoint_sg.id
+}

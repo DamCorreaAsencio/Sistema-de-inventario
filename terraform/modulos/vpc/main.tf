@@ -21,7 +21,7 @@ resource "aws_internet_gateway" "igw" {
 # Subnets públicas (para ALB)
 resource "aws_subnet" "public_a" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.1.0.0/24"
+  cidr_block              = var.public_subnet_a_cidr  # public_a
   availability_zone       = var.az_a
   map_public_ip_on_launch = true
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "public_a" {
 
 resource "aws_subnet" "public_b" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = "10.1.4.0/24"
+  cidr_block              = var.public_subnet_b_cidr  # public_b
   availability_zone       = var.az_b
   map_public_ip_on_launch = true
 
@@ -63,6 +63,21 @@ resource "aws_subnet" "private_rds" {
   availability_zone = var.az_a
   tags = { Name = "${var.project}-private-rds" }
 }
+
+# Segunda subnet privada para RDS en AZ-b kkkkkk
+resource "aws_subnet" "private_rds_b" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = "10.1.5.0/24"  # En otro lado puse variables, esta es CIDR
+  availability_zone = var.az_b
+  tags = { Name = "${var.project}-private-rds-b" }
+}
+
+# Asociación a route table privada
+resource "aws_route_table_association" "private_rds_b_assoc" {
+  subnet_id      = aws_subnet.private_rds_b.id
+  route_table_id = aws_route_table.private.id
+}
+
 
 # ROUTE TABLES
 # Pública (con salida a Internet)

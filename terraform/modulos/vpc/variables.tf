@@ -53,3 +53,7 @@ variable "endpoint_sg_id" {
   description = "Security Group para los endpoints de VPC"
   type        = string
 }
+variable "private_subnet_rds_b_cidr" {
+  description = "CIDR subnet privada para RDS en AZ-b"
+  type        = string
+}

@@ -17,12 +17,17 @@ output "private_subnets_ids" {
   value       = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
 }
 
-output "rds_subnet_id" {
-  description = "Subnet privada RDS"
-  value       = aws_subnet.private_rds.id
+output "rds_subnet_ids" {
+  description = "Subnets privadas para RDS"
+  value       = [aws_subnet.private_rds.id, aws_subnet.private_rds_b.id]
 }
 
 output "vpc_cidr" {
   description = "CIDR VPC"
   value       = aws_vpc.vpc.cidr_block
+}
+
+output "internet_gateway_id" {
+  description = "ID del Internet Gateway"
+  value       = aws_internet_gateway.igw.id
 }

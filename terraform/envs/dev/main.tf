@@ -1,4 +1,4 @@
-# Llamada al módulo de VPC
+#Llamada al BCP (VPC)
 module "vpc" {
   source = "../../modulos/vpc"
 
@@ -11,9 +11,10 @@ module "vpc" {
   private_subnet_ec2_a_cidr = "10.1.1.0/24"
   private_subnet_ec2_b_cidr = "10.1.2.0/24"
   private_subnet_rds_cidr   = "10.1.3.0/24"
+  private_subnet_rds_b_cidr = "10.1.5.0/24"
 
-  az_a = "us-east-2a"
-  az_b = "us-east-2b"
+  az_a           = "us-east-2a"
+  az_b           = "us-east-2b"
   endpoint_sg_id = module.security_groups.endpoint_sg_id
 }
 
