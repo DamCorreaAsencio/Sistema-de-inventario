@@ -1,6 +1,14 @@
 Este entorno implementa la infraestructura completa del Sistema de Inventario en AWS, gestionada con Terraform bajo el enfoque de Infraestructura como Código (IaC).
 Su objetivo es desplegar un entorno modular, automatizado y seguro, asegurando disponibilidad, escalabilidad y trazabilidad para los diferentes servicios que componen la arquitectura.
 
+
+Para hacer los commits:
+git init (por si aún no se inicializó)
+git add.
+git commit -m "feat o fix"
+git push
+
+
 NOTA PERSONAL XD:
 PARA USAR LOS SCRIPTS DE TERRAFORM SIN ERRORES:
 
