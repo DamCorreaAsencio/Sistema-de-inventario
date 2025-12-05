@@ -13,7 +13,7 @@ output "public_subnets_ids" {
 }
 
 output "private_subnets_ids" {
-  description = "Subnets privadas (EC2)"
+  description = "Subnets privadas (EC2 con fargate)"
   value       = [aws_subnet.private_ec2_a.id, aws_subnet.private_ec2_b.id]
 }
 

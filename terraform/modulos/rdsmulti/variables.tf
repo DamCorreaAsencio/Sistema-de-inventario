@@ -9,6 +9,13 @@ variable "environment" {
   default     = "dev"
 }
 
+########################################
+variable "region" {
+  description = "Región de AWS"
+  type        = string
+}
+#########################################
+
 variable "rds_subnet_ids" {
   description = "IDs de las subnets para RDS (mínimo 2 en diferentes AZs)"
   type        = list(string)
@@ -28,7 +35,7 @@ variable "engine_version" {
 variable "instance_class" {
   description = "Clase de instancia RDS"
   type        = string
-  default     = "db.t3.micro" # Free tier eligible
+  default     = "db.t3.micro" 
 }
 
 variable "allocated_storage" {

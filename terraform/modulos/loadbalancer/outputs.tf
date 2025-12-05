@@ -13,3 +13,7 @@ output "target_group_arn" {
 output "listener_arn" {
   value = aws_lb_listener.http.arn
 }
+output "alb_arn_suffix" {
+  description = "ARN suffix del ALB para métricas de CloudWatch"
+  value       = aws_lb.this.arn_suffix
+}
