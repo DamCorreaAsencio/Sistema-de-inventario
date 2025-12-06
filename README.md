@@ -2,6 +2,7 @@
 Integrantes:
 
 Integrantes:
+
 1.Ahumada Soles Carlos
 
 2.Calluchi Patiño Eduardo
@@ -75,6 +76,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
