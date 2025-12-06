@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      # Jenkins home para persistencia
+      - jenkins_home:/var/jenkins_home
+      # Socket de Docker para Docker-in-Docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Directorio del proyecto
+      - ./:/workspace
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    networks:
+      - jenkins-network
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:
+    driver: local
+
+networks:
+  jenkins-network:
+    driver: bridge

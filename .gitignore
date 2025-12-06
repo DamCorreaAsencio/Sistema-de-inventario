@@ -1,12 +1,54 @@
-.terraform/
-terraform/envs/dev/terraform.tfstate
-*.tfstate
-*.tfstate.backup
-terraform/envs/dev/terraform.lock.hcl 
-terraform/envs/dev/terraform.tfstate.backup
+# .gitignore additions for Jenkins CI/CD
 
-# Archivos de registro de crash de Terraform (si existen)
-crash.log
+# Jenkins
+jenkins_home/
+.jenkins/
 
-*.tfvars
-terraform.tfstate*
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/terraform.tfvars
+**/.terraform.tfstate.lock.info
+**/tfplan
+**/terraform-outputs.json
+
+# Checkov
+checkov-results/
+results_junitxml.xml
+results_cli.txt
+results_json.json
+
+# SonarQube
+.sonar/
+.scannerwork/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage/
+*.log
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.pem
+*.key
+.env.local
+.env.*.local
+secrets/

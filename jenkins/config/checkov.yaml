@@ -1,0 +1,97 @@
+# Checkov Configuration
+# Security scanning for Infrastructure as Code
+
+# Frameworks to scan
+framework:
+  - terraform
+  - dockerfile
+  - secrets
+
+# Directories to scan
+directory:
+  - terraform/
+
+# Output formats
+output: 
+  - cli
+  - junitxml
+  - json
+
+# Output file path
+output-file-path: ./checkov-results
+
+# Soft fail mode (don't fail pipeline on findings)
+# Set to false in production
+soft-fail: true
+
+# Skip specific checks (use sparingly)
+skip-check:
+  # Example: Skip checks that are not applicable
+  # - CKV_AWS_79  # Ensure Instance Metadata Service Version 1 is not enabled
+  # - CKV_AWS_8   # Ensure all data stored in the Launch configuration EBS is securely encrypted
+
+# Compact output
+compact: false
+
+# Quiet mode
+quiet: false
+
+# Download external modules
+download-external-modules: true
+
+# External modules directory
+external-modules-download-path: .external_modules
+
+# Evaluate variables
+evaluate-variables: true
+
+# Check severity threshold
+# Options: CRITICAL, HIGH, MEDIUM, LOW
+# check-threshold: HIGH
+
+# Baseline file (to track known issues)
+# baseline: checkov-baseline.json
+
+# Custom policies directory (if you have custom checks)
+# external-checks-dir: ./custom-policies
+
+# Repo ID for tracking
+repo-id: sistema-inventario
+
+# Branch
+branch: main
+
+# Skip framework-specific checks
+# skip-framework:
+#   - arm
+#   - cloudformation
+
+# Enable specific checks only (if needed)
+# check:
+#   - CKV_AWS_20
+#   - CKV_AWS_21
+
+# Suppress specific resources
+# skip-resources-without-violations: true
+
+# Create a baseline of current violations
+# create-baseline: false
+
+# Prisma Cloud integration (if using)
+# prisma-api-url: https://api.prismacloud.io
+# bc-api-key: your-api-key
+
+# GitHub integration
+# repo-root-for-plan-enrichment: ./
+
+# Enable graph-based checks
+enable-secret-scan-all-files: false
+
+# Secrets scanning
+secrets-scan-file-type:
+  - .env
+  - .json
+  - .yaml
+  - .yml
+  - .tf
+  - .tfvars
