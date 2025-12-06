@@ -1,4 +1,13 @@
 # Proyecto Sistema De Inventario
+Integrantes:
+
+Integrantes:
+Ahumada Soles Carlos
+Calluchi Patiño Eduardo
+Principe Huamanchumo Luis
+Sandoval Vargas Robert
+Correa Asencio Damer
+
 
 La gestión del inventario en la empresa se realizaba sobre una infraestructura poco flexible, con configuraciones manuales y sin mecanismos adecuados de respaldo o recuperación ante fallos.
 Esto ocasionaba interrupciones en el servicio, errores en el control de productos y dificultades para escalar la plataforma ante un aumento de usuarios o transacciones. El Sistema de Inventario que implementamos es una herramienta creada para administrar productos y procesos internos de una empresa. Está desplegado en AWS usando Terraform, lo que asegura disponibilidad constante, capacidad de escalado y protección. Mediante módulos como VPC, EC2, RDS, Load Balancer, API Gateway, S3, CloudFront, Route53 y WAF, se construye una arquitectura automática, robusta y preparada para entornos productivos.
@@ -61,6 +70,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
