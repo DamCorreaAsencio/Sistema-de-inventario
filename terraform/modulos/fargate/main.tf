@@ -1,9 +1,15 @@
-# ECS CLUSTER
+# ============================================
+# ECS CLUSTER - Clúster de contenedores
+# Agrupa y gestiona las tareas de Fargate
+# ============================================
 resource "aws_ecs_cluster" "this" {
   name = "${var.project}-cluster"
 }
 
-# IAM ROLES
+# ============================================
+# IAM ROLES - Roles de permisos
+# Define quién puede asumir el rol de ejecución de tareas ECS
+# ============================================
 data "aws_iam_policy_document" "ecs_task_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -43,7 +49,10 @@ resource "aws_iam_role_policy" "ecs_sns_publish" {
   })
 } //AGREGAO DESPUÉS DE CASI TODO PQ ME OLVIDÉ DEL SQS
 
-# TASK DEFINITION
+# ============================================
+# TASK DEFINITION - Definición de la tarea
+# Especifica cómo ejecutar el contenedor (CPU, memoria, imagen)
+# ============================================
 resource "aws_ecs_task_definition" "task" {
   family                   = "${var.project}-task"
   network_mode             = "awsvpc"
@@ -69,7 +78,11 @@ resource "aws_ecs_task_definition" "task" {
   ])
 }
 
-# ECS SERVICE
+# ============================================
+# ECS SERVICE - Servicio de contenedores
+# Mantiene el número deseado de tareas ejecutándose
+# Integra con ALB para balanceo de carga
+# ============================================
 resource "aws_ecs_service" "service" {
   name            = "${var.project}-service"
   cluster         = aws_ecs_cluster.this.id
