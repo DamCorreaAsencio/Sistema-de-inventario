@@ -3,7 +3,7 @@
 La gestión del inventario en la empresa se realizaba sobre una infraestructura poco flexible, con configuraciones manuales y sin mecanismos adecuados de respaldo o recuperación ante fallos.
 Esto ocasionaba interrupciones en el servicio, errores en el control de productos y dificultades para escalar la plataforma ante un aumento de usuarios o transacciones. El Sistema de Inventario que implementamos es una herramienta creada para administrar productos y procesos internos de una empresa. Está desplegado en AWS usando Terraform, lo que asegura disponibilidad constante, capacidad de escalado y protección. Mediante módulos como VPC, EC2, RDS, Load Balancer, API Gateway, S3, CloudFront, Route53 y WAF, se construye una arquitectura automática, robusta y preparada para entornos productivos.
 
-![Imagen de WhatsApp 2025-10-09 a las 15 54 24_89fbf5a8](https://github.com/user-attachments/assets/9b718b47-d957-4bc3-ad7a-f9969f07a994)
+![Imagen de WhatsApp 2025-10-09 a las 15 54 24_89fbf5a8](https://github.com/user-attachments/assets/a7bdb18d-ad87-4763-a94b-02c5bf8435da)
 
 Diagrama de arquitectura propuesto
 
@@ -61,6 +61,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
