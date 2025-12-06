@@ -60,3 +60,6 @@ variable "sns_topic_arn" {
   type        = string
   default     = ""
 }
+variable "image_tag" {
+  type = string
+}

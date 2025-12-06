@@ -49,10 +49,7 @@ resource "aws_iam_role_policy" "ecs_sns_publish" {
   })
 } //AGREGAO DESPUÉS DE CASI TODO PQ ME OLVIDÉ DEL SQS
 
-# ============================================
-# TASK DEFINITION - Definición de la tarea
-# Especifica cómo ejecutar el contenedor (CPU, memoria, imagen)
-# ============================================
+
 resource "aws_ecs_task_definition" "task" {
   family                   = "${var.project}-task"
   network_mode             = "awsvpc"
@@ -65,7 +62,9 @@ resource "aws_ecs_task_definition" "task" {
   container_definitions = jsonencode([
     {
       name      = "app"
-      image     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.repo_name}:latest"
+#     image     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.repo_name}:latest"
+      image     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.repo_name}:${var.image_tag}"
+
       essential = true
       portMappings = [
         # Mala práctica, pero equis: Aquí se pone el 3000 y no 80 pq nuestra app está en 3000 xd

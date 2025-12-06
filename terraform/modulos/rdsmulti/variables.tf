@@ -29,7 +29,7 @@ variable "rds_sg_id" {
 variable "engine_version" {
   description = "Versión de MySQL"
   type        = string
-  default     = "8.0.35"
+  default     = "8.0.39"
 }
 
 variable "instance_class" {
@@ -71,7 +71,7 @@ variable "db_password" {
 variable "backup_retention_period" {
   description = "Días de retención de backups"
   type        = number
-  default     = 7
+  default     = 1
 }
 
 variable "skip_final_snapshot" {

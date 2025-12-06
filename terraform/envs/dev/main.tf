@@ -68,6 +68,7 @@ module "fargate_backend" {
 
 sns_topic_arn = module.sns.sns_topic_arn
 depends_on = [module.sns]
+image_tag = var.image_tag
 }
 
 # Llamada a API Gateway
@@ -96,6 +97,7 @@ module "rds" {
   db_username       = var.db_username
   db_password       = var.db_password
 
+  backup_retention_period = 1
 #
 # Lo que viene está medio waos. En skip_final... y deletion_protection se invierten los true y false en producción
 #

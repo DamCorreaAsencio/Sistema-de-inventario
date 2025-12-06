@@ -1,7 +1,7 @@
 # IP Set para bloquear IPs específicas (opcional)
 resource "aws_wafv2_ip_set" "blocked_ips" {
   name               = "${var.project}-blocked-ips"
-  scope              = "CLOUDFRONT" # Para CloudFront debe ser CLOUDFRONT
+  scope              = "REGIONAL" # Para CloudFront debe ser CLOUDFRONT
   ip_address_version = "IPV4"
   addresses          = var.blocked_ip_addresses
 
@@ -14,7 +14,7 @@ resource "aws_wafv2_ip_set" "blocked_ips" {
 # Web ACL principal
 resource "aws_wafv2_web_acl" "main" {
   name  = "${var.project}-waf-acl"
-  scope = "CLOUDFRONT" # CLOUDFRONT o REGIONAL (para ALB)
+  scope = "REGIONAL" # CLOUDFRONT o REGIONAL (para ALB)
 
   default_action {
     allow {}

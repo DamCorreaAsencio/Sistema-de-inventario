@@ -36,7 +36,7 @@ resource "aws_db_parameter_group" "rds_params" {
 }
 
 # RDS MySQL Multi-AZ Instance
-resource "aws_db_instance" "mysql" {
+resource "aws_db_instance" "mysql" { //línea 39 kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
   identifier     = "${var.project}-mysql"
   engine         = "mysql"
   engine_version = var.engine_version

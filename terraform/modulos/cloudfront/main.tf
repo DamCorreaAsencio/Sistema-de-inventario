@@ -179,9 +179,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   }
 
   # WAF (si está configurado)
-  web_acl_id = var.waf_acl_id != "" ? var.waf_acl_id : null
-
-  tags = {
+    tags = {
     Name        = "${var.project}-cloudfront"
     Environment = var.environment
   }

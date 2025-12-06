@@ -24,3 +24,7 @@ variable "db_password" {
   sensitive   = true
   # NO poner tu contraseña aquí. Usar terraform.tfvars o variables de entorno... o tu bloc de notas aña
 }
+variable "image_tag" {
+  description = "Tag de la imagen Docker que será desplegada en Fargate."
+  type        = string
+}
