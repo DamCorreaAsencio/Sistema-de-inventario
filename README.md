@@ -1,5 +1,4 @@
 # Proyecto Sistema De Inventario
-Integrantes:
 
 Integrantes:
 
@@ -76,6 +75,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
