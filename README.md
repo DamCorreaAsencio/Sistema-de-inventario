@@ -1,73 +1,190 @@
-# Proyecto Sistema De Inventario
+# Sistema de Inventario - Jenkins CI/CD Pipeline
 
-La gestión del inventario en la empresa se realizaba sobre una infraestructura poco flexible, con configuraciones manuales y sin mecanismos adecuados de respaldo o recuperación ante fallos.
-Esto ocasionaba interrupciones en el servicio, errores en el control de productos y dificultades para escalar la plataforma ante un aumento de usuarios o transacciones. El Sistema de Inventario que implementamos es una herramienta creada para administrar productos y procesos internos de una empresa. Está desplegado en AWS usando Terraform, lo que asegura disponibilidad constante, capacidad de escalado y protección. Mediante módulos como VPC, EC2, RDS, Load Balancer, API Gateway, S3, CloudFront, Route53 y WAF, se construye una arquitectura automática, robusta y preparada para entornos productivos.
+## 📖 Descripción
 
-![Imagen de WhatsApp 2025-10-09 a las 15 54 24_89fbf5a8](https://github.com/user-attachments/assets/9b718b47-d957-4bc3-ad7a-f9969f07a994)
+Pipeline completo de CI/CD con Jenkins para automatizar el despliegue de infraestructura AWS usando Terraform, incluyendo:
 
-Diagrama de arquitectura propuesto
+- ✅ Unit tests de módulos Terraform
+- ✅ Construcción de imágenes Docker
+- ✅ Tests de aplicación
+- ✅ Análisis de calidad con SonarCloud
+- ✅ Escaneo de seguridad con Checkov
+- ✅ Despliegue automatizado a AWS
 
-El Sistema de Inventario desarrollado sobre la infraestructura de AWS tiene como propósito solucionar estos problemas dentro de una empresa:
-1. Vulnerabilidad en la seguridad de datos
+## 🚀 Inicio Rápido
 
-Los datos de inventario y usuarios estaban expuestos a accesos no autorizados.
+### Para Colaboradores
 
-2. Retrasos en la actualización de la información
+Si eres un colaborador nuevo, sigue la guía completa:
 
-La información no se sincronizaba oportunamente entre las diferentes áreas.
+📘 **[GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)** - Configuración paso a paso desde cero
 
-3. Escalabilidad limitada ante el crecimiento de la demanda
+### Para Desarrollo Local
 
-El sistema anterior no soportaba el incremento de usuarios o transacciones simultáneas.
+Si ya tienes Jenkins configurado:
 
-4. Baja disponibilidad y resiliencia del sistema
+📗 **[INICIO-RAPIDO.md](./INICIO-RAPIDO.md)** - Guía rápida de 10 minutos
 
-Las caídas de servidores comprometían la continuidad del servicio.
+## 📁 Estructura del Proyecto
 
-El sistema de inventario ha sido diseñado siguiendo cinco requerimientos no funcionales que garantizan su estabilidad y eficiencia en un entorno productivo. 
-
-En primer lugar, se prioriza la disponibilidad, asegurando que la plataforma se mantenga operativa incluso ante fallos de componentes mediante el uso de RDS Multi-AZ, balanceadores de carga (ALB) y la distribución de instancias EC2 en dos zonas de disponibilidad, alcanzando un nivel de servicio del 95%.
-
-La escalabilidad también es un aspecto clave, permitiendo que la infraestructura se adapte automáticamente ante incrementos de carga o usuarios, gracias a la implementación de Auto Scaling en las instancias EC2, balanceo dinámico con ALB y el enrutamiento gestionado a través de API Gateway, manteniendo tiempos de ajuste inferiores a dos minutos.
-
-En cuanto a la seguridad, se garantiza la protección de los datos y recursos del sistema mediante el uso de subredes privadas, políticas de identidad y acceso (IAM), comunicación cifrada bajo HTTPS, y un firewall de aplicaciones web (WAF) que bloquea accesos no autorizados, con un máximo de tres intentos fallidos por mes.
-
-La mantenibilidad se aborda mediante la automatización total del despliegue y actualización de la infraestructura, utilizando Terraform, Ansible y pipelines CI/CD con GitHub Actions y ECR, permitiendo tiempos de despliegue inferiores a 10 minutos y asegurando la reproducibilidad del entorno.
-
-Finalmente, se refuerza la confiabilidad del sistema mediante un monitoreo constante y notificaciones automáticas de fallos, logradas con la integración de CloudWatch y SNS, que permiten detectar y alertar sobre incidentes en menos de un minuto, garantizando una rápida respuesta ante cualquier eventualidad.
-
-Nuestro proyecto se puede desplegar mediante estos comandos:
-
-```bash
-cd .\terraform\dev\evs\
+```
+Sistema-de-inventario/
+├── Jenkinsfile                          # Pipeline principal
+├── GUIA-COLABORADOR.md                  # 👈 EMPIEZA AQUÍ si eres nuevo
+├── INICIO-RAPIDO.md                     # Guía rápida
+├── docker-compose.jenkins.yml           # Configuración Jenkins
+├── install-jenkins.bat/.sh              # Scripts de instalación
+├── create-aws-resources.bat/.sh         # Scripts para AWS
+├── jenkins/
+│   ├── LOCAL-SETUP.md                   # Guía detallada local
+│   ├── SETUP.md                         # Guía completa
+│   ├── QUICKSTART.md                    # Inicio rápido
+│   ├── README.md                        # Documentación general
+│   ├── scripts/                         # Scripts del pipeline
+│   │   ├── terraform-test.sh
+│   │   ├── build-docker.sh
+│   │   ├── run-tests.sh
+│   │   └── deploy-validation.sh
+│   └── config/                          # Configuraciones
+│       ├── sonar-project.properties
+│       └── checkov.yaml
+├── terraform/                           # Infraestructura como código
+├── backend/                             # Backend Node.js
+└── frontend/                            # Frontend React
 ```
 
-```bash
-Terraform init
-```
+## 🎯 Características del Pipeline
+
+### Stages Implementados
+
+| Stage | Descripción | Duración |
+|-------|-------------|----------|
+| Checkout | Clona el repositorio | 10s |
+| Terraform Unit Tests | Valida módulos Terraform | 2 min |
+| Build Docker | Construye imagen backend | 3 min |
+| Application Tests | Tests unitarios | 1 min |
+| SonarCloud Analysis | Análisis de calidad | 2 min |
+| Checkov Security Scan | Escaneo de seguridad | 1 min |
+| Terraform Plan | Planifica cambios | 2 min |
+| Approval | Aprobación manual | Variable |
+| Terraform Apply | Despliega infraestructura | 15 min |
+| Deploy Validation | Verifica deployment | 2 min |
+
+**Total:** ~25-30 minutos (con deployment completo)
+
+### Seguridad
+
+- ✅ Credenciales en Jenkins Credentials Store
+- ✅ Escaneo de seguridad con Checkov
+- ✅ Análisis de vulnerabilidades con SonarCloud
+- ✅ Secrets no en código
+- ✅ Imágenes Docker escaneadas
+
+### Calidad
+
+- ✅ Unit tests antes de deploy
+- ✅ Quality gates en SonarCloud
+- ✅ Terraform validate y plan obligatorios
+- ✅ Revisión manual antes de apply
+
+## 💰 Costos AWS
+
+### Testing (Actual)
+- S3 bucket: $0.01/mes
+- DynamoDB: $0 (free tier)
+- ECR: $0.10/mes
+- **Total: ~$0.15/mes** ✅
+
+### Producción (Infraestructura completa)
+- RDS Multi-AZ: ~$30/mes
+- ECS Fargate: ~$20/mes
+- ALB: ~$20/mes
+- CloudFront: ~$10/mes
+- Otros: ~$20/mes
+- **Total: ~$150-200/mes** ⚠️
+
+## 📋 Prerrequisitos
+
+- Docker Desktop
+- Git
+- AWS CLI
+- Credenciales AWS (Access Key + Secret Key)
+- Cuenta en SonarCloud (gratis)
+
+## 🔧 Configuración
+
+### 1. Clonar Repositorio
 
 ```bash
-Terraform validate
+git clone https://github.com/DamCorreaAsencio/Sistema-de-inventario.git
+cd Sistema-de-inventario
+git checkout pruebaJenkins
 ```
 
+### 2. Instalar Jenkins
+
+**Windows:**
+```cmd
+.\install-jenkins.bat
+```
+
+**Linux/Mac:**
 ```bash
-Terraform plan
+bash install-jenkins.sh
 ```
 
+### 3. Crear Recursos AWS
+
+```cmd
+.\create-aws-resources.bat
+```
+
+### 4. Configurar Jenkins
+
+Seguir la guía: [GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)
+
+## 🎓 Documentación
+
+- 📘 **[GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)** - Para nuevos colaboradores
+- 📗 **[INICIO-RAPIDO.md](./INICIO-RAPIDO.md)** - Guía rápida
+- 📕 **[jenkins/LOCAL-SETUP.md](./jenkins/LOCAL-SETUP.md)** - Setup local detallado
+- 📙 **[jenkins/SETUP.md](./jenkins/SETUP.md)** - Guía completa
+- 🔌 **[jenkins/PLUGINS.md](./jenkins/PLUGINS.md)** - Lista de plugins necesarios
+
+## 🐛 Troubleshooting
+
+### Jenkins no inicia
 ```bash
-Terraform apply -auto-approve
+docker logs jenkins
+docker-compose -f docker-compose.jenkins.yml restart
 ```
 
-```bash
-Terraform destroy
-```
+### Pipeline falla
+- Revisar logs en Jenkins Console Output
+- Verificar credenciales AWS
+- Verificar configuración de SonarCloud
 
+Ver más en: [GUIA-COLABORADOR.md#troubleshooting](./GUIA-COLABORADOR.md#troubleshooting)
 
+## 🤝 Contribuir
 
+1. Fork el proyecto
+2. Crea una rama: `git checkout -b feature/nueva-funcionalidad`
+3. Commit: `git commit -m 'feat: nueva funcionalidad'`
+4. Push: `git push origin feature/nueva-funcionalidad`
+5. Abre un Pull Request
 
+## 📞 Soporte
 
+Para problemas o preguntas:
+1. Revisar documentación en carpeta `jenkins/`
+2. Revisar logs del pipeline
+3. Verificar configuración de credenciales
 
+## 📜 Licencia
 
+Este proyecto es parte del Sistema de Inventario.
 
+---
 
-
+**Desarrollado con ❤️ para automatizar el despliegue de infraestructura AWS**
