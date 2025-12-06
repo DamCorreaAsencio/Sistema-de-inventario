@@ -36,9 +36,9 @@ module "alb" {
   alb_sg_id      = module.security_groups.alb_sg_id
 }
 
-# Llamada al SNQ y SQs
-module "sns_sqs" {
-  source = "../../modulos/sns_sqs"
+# Llamada al SNS anteriormente con sqs xddd
+module "sns" {
+  source = "../../modulos/sns"
 
   project     = "sistemainventario"
   environment = "dev"
@@ -46,7 +46,7 @@ module "sns_sqs" {
   # Email del admin (opcional)
   admin_email = "stefanocorreaasencio@gmail.com"  # e-mail de referencia a ver
 
-  queue_depth_threshold = 100
+#  queue_depth_threshold = 100
 }
 
 # Llamada al fargate
@@ -66,8 +66,8 @@ module "fargate_backend" {
   target_group_arn    = module.alb.target_group_arn
   lb_listener         = module.alb.listener_arn
 
-  sns_topic_arn = module.sns_sqs.sns_topic_arn
-  depends_on = [module.sns_sqs]
+sns_topic_arn = module.sns.sns_topic_arn
+depends_on = [module.sns]
 }
 
 # Llamada a API Gateway

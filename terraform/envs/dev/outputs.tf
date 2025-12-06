@@ -52,18 +52,18 @@ output "waf_acl_id" {
   value       = module.waf.web_acl_id
 }
 
-# SQS y SNS
+# SQS y SNS -------> SNS
 output "sns_topic_arn" {
   description = "ARN del tópico SNS para alertas"
-  value       = module.sns_sqs.sns_topic_arn
+  value       = module.sns.sns_topic_arn
 }
 
-output "sqs_queue_url" {
-  description = "URL de la cola SQS"
-  value       = module.sns_sqs.sqs_queue_url
-}
+#output "sqs_queue_url" {
+#  description = "URL de la cola SQS"
+#  value       = module.sns_sqs.sqs_queue_url
+#}
 
-output "sqs_queue_name" {
-  description = "Nombre de la cola SQS"
-  value       = module.sns_sqs.sqs_queue_name
-}
+#output "sqs_queue_name" {
+#  description = "Nombre de la cola SQS"
+#  value       = module.sns_sqs.sqs_queue_name
+#}

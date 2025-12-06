@@ -23,9 +23,7 @@ variable "api_gateway_domain" {
 variable "price_class" {
   description = "Clase de precio de CloudFront"
   type        = string
-  default     = "PriceClass_100" # Más barato: USA, Canadá, Europa
-  # PriceClass_200: + Asia, África, Oceanía
-  # PriceClass_All: Todas las ubicaciones
+  default     = "PriceClass_100" # Más barato xddd tmb se usan USA, Canadá, Europa
 }
 
 variable "waf_acl_id" {

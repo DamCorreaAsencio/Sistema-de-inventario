@@ -21,8 +21,8 @@ variable "sns_monitoring_topic_arn" {
   default     = ""
 }
 
-variable "queue_depth_threshold" {
-  description = "Umbral de mensajes en cola para generar alarma"
-  type        = number
-  default     = 100
-}
+#variable "queue_depth_threshold" {
+#  description = "Umbral de mensajes en cola para generar alarma"
+#  type        = number
+#  default     = 100
+#}

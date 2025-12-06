@@ -22,5 +22,5 @@ variable "db_password" {
   description = "Contraseña del usuario master"
   type        = string
   sensitive   = true
-  # NO pongas la contraseña aquí, usa terraform.tfvars o variables de entorno
+  # NO poner tu contraseña aquí. Usar terraform.tfvars o variables de entorno... o tu bloc de notas aña
 }

@@ -4,7 +4,7 @@ Su objetivo es desplegar un entorno modular, automatizado y seguro, asegurando d
 
 Para hacer los commits:
 git init (por si aún no se inicializó)
-git add.
+git add .
 git commit -m "feat o fix"
 git push
 
