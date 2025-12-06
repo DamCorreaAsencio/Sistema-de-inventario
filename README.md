@@ -2,15 +2,15 @@
 
 Integrantes:
 
-1.Ahumada Soles Carlos
+1. Ahumada Soles Carlos
 
-2.Calluchi Patiño Eduardo
+2. Calluchi Patiño Eduardo
 
-3.Principe Huamanchumo Luis
+3. Principe Huamanchumo Luis
 
-4.Sandoval Vargas Robert
+4. Sandoval Vargas Robert
 
-5.Correa Asencio Damer
+5. Correa Asencio Damer
 
 
 
@@ -75,6 +75,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
