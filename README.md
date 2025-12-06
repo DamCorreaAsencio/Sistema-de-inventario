@@ -2,11 +2,16 @@
 Integrantes:
 
 Integrantes:
-Ahumada Soles Carlos
-Calluchi Patiño Eduardo
-Principe Huamanchumo Luis
-Sandoval Vargas Robert
-Correa Asencio Damer
+1.Ahumada Soles Carlos
+
+2.Calluchi Patiño Eduardo
+
+3.Principe Huamanchumo Luis
+
+4.Sandoval Vargas Robert
+
+5.Correa Asencio Damer
+
 
 
 La gestión del inventario en la empresa se realizaba sobre una infraestructura poco flexible, con configuraciones manuales y sin mecanismos adecuados de respaldo o recuperación ante fallos.
@@ -70,6 +75,7 @@ Terraform apply -auto-approve
 ```bash
 Terraform destroy
 ```
+
 
 
 
