@@ -1,36 +1,36 @@
 # Sistema de Inventario - Jenkins CI/CD Pipeline
 
-## 📖 Descripción
+##  Descripción
 
 Pipeline completo de CI/CD con Jenkins para automatizar el despliegue de infraestructura AWS usando Terraform, incluyendo:
 
-- ✅ Unit tests de módulos Terraform
-- ✅ Construcción de imágenes Docker
-- ✅ Tests de aplicación
-- ✅ Análisis de calidad con SonarCloud
-- ✅ Escaneo de seguridad con Checkov
-- ✅ Despliegue automatizado a AWS
+-  Unit tests de módulos Terraform
+-  Construcción de imágenes Docker
+-  Tests de aplicación
+-  Análisis de calidad con SonarCloud
+-  Escaneo de seguridad con Checkov
+-  Despliegue automatizado a AWS
 
-## 🚀 Inicio Rápido
+##  Inicio Rápido
 
 ### Para Colaboradores
 
 Si eres un colaborador nuevo, sigue la guía completa:
 
-📘 **[GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)** - Configuración paso a paso desde cero
+ **[GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)** - Configuración paso a paso desde cero
 
 ### Para Desarrollo Local
 
 Si ya tienes Jenkins configurado:
 
-📗 **[INICIO-RAPIDO.md](./INICIO-RAPIDO.md)** - Guía rápida de 10 minutos
+ **[INICIO-RAPIDO.md](./INICIO-RAPIDO.md)** - Guía rápida de 10 minutos
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```
 Sistema-de-inventario/
 ├── Jenkinsfile                          # Pipeline principal
-├── GUIA-COLABORADOR.md                  # 👈 EMPIEZA AQUÍ si eres nuevo
+├── GUIA-COLABORADOR.md                  #  EMPIEZA AQUÍ si eres nuevo
 ├── INICIO-RAPIDO.md                     # Guía rápida
 ├── docker-compose.jenkins.yml           # Configuración Jenkins
 ├── install-jenkins.bat/.sh              # Scripts de instalación
@@ -53,7 +53,7 @@ Sistema-de-inventario/
 └── frontend/                            # Frontend React
 ```
 
-## 🎯 Características del Pipeline
+##  Características del Pipeline
 
 ### Stages Implementados
 
@@ -74,26 +74,26 @@ Sistema-de-inventario/
 
 ### Seguridad
 
-- ✅ Credenciales en Jenkins Credentials Store
-- ✅ Escaneo de seguridad con Checkov
-- ✅ Análisis de vulnerabilidades con SonarCloud
-- ✅ Secrets no en código
-- ✅ Imágenes Docker escaneadas
+-  Credenciales en Jenkins Credentials Store
+-  Escaneo de seguridad con Checkov
+-  Análisis de vulnerabilidades con SonarCloud
+-  Secrets no en código
+-  Imágenes Docker escaneadas
 
 ### Calidad
 
-- ✅ Unit tests antes de deploy
-- ✅ Quality gates en SonarCloud
-- ✅ Terraform validate y plan obligatorios
-- ✅ Revisión manual antes de apply
+-  Unit tests antes de deploy
+-  Quality gates en SonarCloud
+-  Terraform validate y plan obligatorios
+-  Revisión manual antes de apply
 
-## 💰 Costos AWS
+##  Costos AWS
 
 ### Testing (Actual)
 - S3 bucket: $0.01/mes
 - DynamoDB: $0 (free tier)
 - ECR: $0.10/mes
-- **Total: ~$0.15/mes** ✅
+- **Total: ~$0.15/mes** 
 
 ### Producción (Infraestructura completa)
 - RDS Multi-AZ: ~$30/mes
@@ -101,9 +101,9 @@ Sistema-de-inventario/
 - ALB: ~$20/mes
 - CloudFront: ~$10/mes
 - Otros: ~$20/mes
-- **Total: ~$150-200/mes** ⚠️
+- **Total: ~$150-200/mes** 
 
-## 📋 Prerrequisitos
+##  Prerrequisitos
 
 - Docker Desktop
 - Git
@@ -111,7 +111,7 @@ Sistema-de-inventario/
 - Credenciales AWS (Access Key + Secret Key)
 - Cuenta en SonarCloud (gratis)
 
-## 🔧 Configuración
+##  Configuración
 
 ### 1. Clonar Repositorio
 
@@ -143,15 +143,15 @@ bash install-jenkins.sh
 
 Seguir la guía: [GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)
 
-## 🎓 Documentación
+##  Documentación
 
-- 📘 **[GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)** - Para nuevos colaboradores
-- 📗 **[INICIO-RAPIDO.md](./INICIO-RAPIDO.md)** - Guía rápida
-- 📕 **[jenkins/LOCAL-SETUP.md](./jenkins/LOCAL-SETUP.md)** - Setup local detallado
-- 📙 **[jenkins/SETUP.md](./jenkins/SETUP.md)** - Guía completa
-- 🔌 **[jenkins/PLUGINS.md](./jenkins/PLUGINS.md)** - Lista de plugins necesarios
+-  **[GUIA-COLABORADOR.md](./GUIA-COLABORADOR.md)** - Para nuevos colaboradores
+-  **[INICIO-RAPIDO.md](./INICIO-RAPIDO.md)** - Guía rápida
+-  **[jenkins/LOCAL-SETUP.md](./jenkins/LOCAL-SETUP.md)** - Setup local detallado
+-  **[jenkins/SETUP.md](./jenkins/SETUP.md)** - Guía completa
+-  **[jenkins/PLUGINS.md](./jenkins/PLUGINS.md)** - Lista de plugins necesarios
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Jenkins no inicia
 ```bash
@@ -166,7 +166,7 @@ docker-compose -f docker-compose.jenkins.yml restart
 
 Ver más en: [GUIA-COLABORADOR.md#troubleshooting](./GUIA-COLABORADOR.md#troubleshooting)
 
-## 🤝 Contribuir
+##  Contribuir
 
 1. Fork el proyecto
 2. Crea una rama: `git checkout -b feature/nueva-funcionalidad`
@@ -174,17 +174,15 @@ Ver más en: [GUIA-COLABORADOR.md#troubleshooting](./GUIA-COLABORADOR.md#trouble
 4. Push: `git push origin feature/nueva-funcionalidad`
 5. Abre un Pull Request
 
-## 📞 Soporte
+##  Soporte
 
 Para problemas o preguntas:
 1. Revisar documentación en carpeta `jenkins/`
 2. Revisar logs del pipeline
 3. Verificar configuración de credenciales
 
-## 📜 Licencia
+##  Licencia
 
 Este proyecto es parte del Sistema de Inventario.
 
----
 
-**Desarrollado con ❤️ para automatizar el despliegue de infraestructura AWS**
